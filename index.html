@@ -1,307 +1,128 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Homophones & Homonyms — A4 Poster Worksheet (Fixed)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homophones and Homonyms Poster</title>
 <style>
-  /* Page / print settings */
-  @page { size: A4 portrait; margin: 12mm; }
-  html,body{height:auto;margin:0;padding:0;background:#fff6ea;}
-  body{
-    font-family: "Century Gothic", "Trebuchet MS", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    color:#222;
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-    padding:12mm; /* safe outer margin */
-    box-sizing:border-box;
+  @page { size: A4 landscape; margin: 1cm; }
+  body {
+    font-family: "Comic Sans MS", sans-serif;
+    background: linear-gradient(90deg, #ffe8c7, #fff6e6, #e2fff9);
+    margin: 0;
+    padding: 0;
+    color: #333;
+    overflow: hidden;
   }
-
-  /* The poster will flow in height (no fixed A4 height) so it won't be clipped */
-  .poster{
-    width:100%;
-    max-width:210mm;   /* A4 width limit */
-    box-sizing:border-box;
-    padding:14mm;
-    border-radius:10px;
-    background:
-      linear-gradient(180deg, rgba(255,248,240,0.98), rgba(255,246,236,0.99));
-    display:grid;
-    grid-template-rows: auto 1fr auto;
-    gap:10px;
-    /* subtle shadow for screen only */
-    box-shadow: 0 8px 24px rgba(15,20,30,0.06);
+  .poster {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 20px 40px;
   }
-
-  header{
-    display:flex;gap:12px;align-items:center;
+  .section {
+    width: 23%;
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    box-sizing: border-box;
   }
-  .logo{
-    width:84px;height:84px;border-radius:10px;
-    background:linear-gradient(135deg,#ff8a5b,#ffd36e);
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  h1 {
+    text-align: center;
+    color: #ff7b54;
+    font-size: 26px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px #fff;
   }
-  .logo svg{width:48px;height:48px}
-
-  h1{
-    font-size:24px;margin:0;color:#3a3a3a;line-height:1.05;
+  h2 {
+    background-color: #ffcc6f;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+    color: #333;
+    font-size: 16px;
+    margin: 10px 0;
   }
-  .subtitle{color:#6b6b6b;margin-top:6px;font-size:13px}
-
-  .meta{display:flex;gap:10px;margin-top:8px;align-items:center;flex-wrap:wrap}
-  .meta .field{
-    background:#fff;border-radius:10px;padding:8px 12px;font-weight:700;
-    box-shadow:0 6px 12px rgba(200,150,120,0.05);
-    font-size:13px;color:#5a2f1f;
-    min-width:200px;
+  p, li {
+    font-size: 14px;
+    line-height: 1.4em;
   }
-
-  main{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:10px;
-    margin-top:6px;
-    align-content:start;
+  .line {
+    border-bottom: 1px dotted #999;
+    display: inline-block;
+    width: 100%;
+    height: 16px;
   }
-
-  .card{
-    background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,253,250,0.98));
-    border-radius:10px;padding:10px;box-shadow:0 6px 12px rgba(30,30,30,0.03);
-    display:flex;flex-direction:column;gap:8px;
+  .wordpair, .sentence {
+    background-color: #e7fff8;
+    border-radius: 10px;
+    padding: 5px 8px;
+    margin: 4px 0;
   }
-
-  .card h2{
-    font-size:15px;margin:0;display:flex;align-items:center;gap:8px;color:#2f2f2f;
-  }
-  .card .desc{font-size:12px;color:#6b6b6b}
-
-  .match-list{display:flex;flex-direction:column;gap:8px;margin-top:6px}
-  .pair{
-    display:flex;gap:10px;align-items:center;padding:8px;border-radius:8px;
-    background:linear-gradient(180deg,#fff,#fff8f5);
-    border:1px solid rgba(0,0,0,0.03);
-  }
-  .pair .icon{width:56px;height:56px;display:grid;place-items:center;border-radius:8px;background:#fff}
-  .pair .text{font-weight:700;font-size:13px;color:#3b3b3b}
-  .pair .select{margin-left:auto;font-size:12px;color:#6b6b6b}
-
-  .choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
-  .choice{
-    display:flex;gap:10px;align-items:center;padding:8px;border-radius:8px;background:#f6fffb;
-    border:1px solid rgba(110,200,170,0.08);
-  }
-  .choice .emoji{width:44px;height:44px;display:grid;place-items:center;border-radius:8px;background:#fff;font-size:20px}
-  .choice .q{font-weight:700;font-size:13px}
-  .fill-line{margin-left:auto;border-bottom:2px solid rgba(0,0,0,0.12);min-width:100px;height:18px}
-
-  .two{display:flex;flex-direction:column;gap:8px;margin-top:6px}
-  .two .label{font-size:12px;color:#6b6b6b}
-  .linebox{height:36px;border-radius:8px;background:#fff;padding:8px;border:1px dashed rgba(0,0,0,0.06);font-size:13px;display:flex;align-items:center}
-
-  .find-list{display:flex;flex-direction:column;gap:8px;margin-top:6px}
-  .find-item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:8px;background:#fffaf6;border:1px solid rgba(0,0,0,0.03)}
-  .find-item .emoji{width:40px;height:40px;display:grid;place-items:center;background:#fff;border-radius:8px}
-  .find-item .sentence{flex:1;font-size:13px}
-  .find-item .answer-line{min-width:120px;border-bottom:2px solid rgba(0,0,0,0.12);padding-bottom:6px;font-weight:700;color:#2f2f2f;text-align:center}
-
-  footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px;gap:8px;flex-wrap:wrap}
-  .tip{font-size:12px;color:#6b6b6b}
-  .small{font-size:12px;color:#6b6b6b}
-
-  /* Print tweaks */
-  @media print{
-    body{padding:0;background:#fff}
-    .poster{box-shadow:none;border-radius:0;padding:12mm;max-width:100%}
-    header, footer{page-break-inside:avoid}
-    main{page-break-inside:avoid}
-  }
-
-  /* small screens: stack columns */
-  @media (max-width:900px){
-    main{grid-template-columns:1fr}
-    .meta .field{min-width:160px}
+  .footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
   }
 </style>
 </head>
 <body>
-  <div class="poster" role="article" aria-labelledby="poster-title">
-    <header>
-      <div class="logo" aria-hidden="true">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="6" y="12" width="36" height="36" rx="6" fill="#fff" opacity="0.95"/>
-          <path d="M10 14h36v8H10z" fill="#ff8a5b"/>
-          <path d="M46 14v28" stroke="#ffd36e" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="52" cy="18" r="8" fill="#6ad3d1"/>
-          <path d="M52 13v6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </div>
+  <h1>🦋 Homophones & Homonyms Revision Poster 🦋</h1>
 
-      <div>
-        <h1 id="poster-title">Homophones & Homonyms — Revision Worksheet</h1>
-        <div class="subtitle">Pictorial & kid-friendly practice — match, choose, write, and find pairs!</div>
-        <div class="meta" aria-hidden="true">
-          <div class="field">Student Name: _________________________</div>
-          <div class="field">Date: _________________________</div>
-        </div>
-      </div>
-    </header>
+  <div class="poster">
 
-    <main role="main">
-      <!-- Left column -->
-      <section class="card" aria-labelledby="secA">
-        <h2 id="secA">
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6v13a1 1 0 0 0 1 1h14V6H3z" fill="#ffd36e"/><path d="M21 6h-7v14h7V6z" fill="#ff8a5b"/></svg>
-          Section A — Understanding the Words
-        </h2>
-        <div class="desc">Homonyms: words with the same pronunciation (and sometimes same spelling) but different meanings. Homophones: words that sound the same but have different spellings and meanings (e.g., <strong>meat</strong> / <strong>meet</strong>).</div>
+    <div class="section">
+      <h2>Section A: Understanding the Words</h2>
+      <p><strong>Homonyms</strong> → same spelling or pronunciation but <em>different meanings</em>.</p>
+      <p><strong>Homophones</strong> → same sound but <em>different spelling & meaning</em>.</p>
+      <p>Match the word pair:</p>
+      <div class="wordpair">A. Bear (animal) & Bear (to deal with something) → <span class="line"></span></div>
+      <div class="wordpair">B. Buy & By → <span class="line"></span></div>
+      <p style="text-align:center;">A ____ B ____</p>
+    </div>
 
-        <div class="match-list" aria-label="Match the word pair to the correct description">
-          <div class="pair">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" width="48" height="48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="32" cy="32" r="28" fill="#ffefd5"/>
-                <circle cx="22" cy="24" r="6" fill="#fff"/>
-                <circle cx="42" cy="24" r="6" fill="#fff"/>
-                <circle cx="22" cy="24" r="3" fill="#4b2e2e"/>
-                <circle cx="42" cy="24" r="3" fill="#4b2e2e"/>
-                <ellipse cx="32" cy="40" rx="10" ry="6" fill="#4b2e2e"/>
-              </svg>
-            </div>
-            <div class="text">A. Bear — (animal) & Bear — (to deal with something)</div>
-            <div class="select">Choose: ☐ Homophones ☐ Homonyms</div>
-          </div>
+    <div class="section">
+      <h2>Section B: Choose the Correct Word</h2>
+      <p><em>Pick the correct homophone:</em></p>
+      <ul>
+        <li>He doesn’t eat much (meat / meet). → <span class="line"></span></li>
+        <li>Who (eight / ate) the last cookie? → <span class="line"></span></li>
+        <li>I need to stop (buy / by) the shop. → <span class="line"></span></li>
+        <li>The lion has a thick (mane / main). → <span class="line"></span></li>
+        <li>The bird fears the (pray / prey) bird. → <span class="line"></span></li>
+        <li>Will you (dew / do) the laundry? → <span class="line"></span></li>
+      </ul>
+    </div>
 
-          <div class="pair">
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64" width="48" height="48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="6" y="12" width="28" height="36" rx="6" fill="#e6fff9"/>
-                <path d="M38 20h16v24H38z" fill="#fff3e6"/>
-                <circle cx="22" cy="34" r="4" fill="#ff8a5b"/>
-                <path d="M36 28h10" stroke="#6ad3d1" stroke-width="2" stroke-linecap="round"/>
-                <path d="M36 36h10" stroke="#ffd36e" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="text">B. Buy & By</div>
-            <div class="select">Choose: ☐ Homophones ☐ Homonyms</div>
-          </div>
+    <div class="section">
+      <h2>Section C: Using Homonyms</h2>
+      <p><strong>Word:</strong> Lie</p>
+      <p><em>Meaning 1 – To rest or be flat:</em></p>
+      <div class="line"></div>
+      <p><em>Meaning 2 – To say something untrue:</em></p>
+      <div class="line"></div>
+    </div>
 
-          <div style="font-weight:800;margin-top:6px">Write: A. _____  &nbsp;&nbsp;&nbsp; B. _____</div>
-        </div>
-      </section>
+    <div class="section">
+      <h2>Section D: Find the Pair</h2>
+      <p>Find the <strong>homophone pairs</strong> in each sentence:</p>
+      <div class="sentence">The baker said, “I know I have no bread left.” → (know / no)</div>
+      <div class="sentence">My aunt likes to watch the ant crawl. → <span class="line"></span></div>
+      <div class="sentence">We went their to see their new house. → <span class="line"></span></div>
+      <div class="sentence">The children threw the ball through the hoop. → <span class="line"></span></div>
+    </div>
 
-      <!-- Right column top -->
-      <section class="card" aria-labelledby="secB">
-        <h2 id="secB">
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v7" stroke="#ff8a5b" stroke-width="2" stroke-linecap="round"/><path d="M10 3v7" stroke="#ff8a5b" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="16" r="5" fill="#ffd36e"/></svg>
-          Section B — Choose the Correct Word (Homophones)
-        </h2>
-        <div class="desc">Choose the correct homophone in the brackets to complete each sentence.</div>
+  </div>
 
-        <div class="choices" role="list">
-          <div class="choice" role="listitem">
-            <div class="emoji" aria-hidden="true">🥩</div>
-            <div class="q">He doesn't eat much <strong>(meat / meet)</strong>.</div>
-            <div class="fill-line" aria-hidden="true"></div>
-          </div>
-
-          <div class="choice" role="listitem">
-            <div class="emoji" aria-hidden="true">🍪</div>
-            <div class="q">Who <strong>(eight / ate)</strong> the last cookie?</div>
-            <div class="fill-line" aria-hidden="true"></div>
-          </div>
-
-          <div class="choice" role="listitem">
-            <div class="emoji" aria-hidden="true">🏪</div>
-            <div class="q">I need to stop <strong>(buy / by)</strong> the shop on my way home.</div>
-            <div class="fill-line" aria-hidden="true"></div>
-          </div>
-
-          <div class="choice" role="listitem">
-            <div class="emoji" aria-hidden="true">🦁</div>
-            <div class="q">The lion has a beautiful, thick <strong>(mane / main)</strong>.</div>
-            <div class="fill-line" aria-hidden="true"></div>
-          </div>
-
-          <div class="choice" role="listitem">
-            <div class="emoji" aria-hidden="true">🐦</div>
-            <div class="q">The little bird is afraid of the <strong>(pray / prey)</strong> bird that hunts it.</div>
-            <div class="fill-line" aria-hidden="true"></div>
-          </div>
-
-          <div class="choice" role="listitem">
-            <div class="emoji" aria-hidden="true">🧺</div>
-            <div class="q">Will you <strong>(dew / do)</strong> the laundry today?</div>
-            <div class="fill-line" aria-hidden="true"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Left column bottom -->
-      <section class="card" aria-labelledby="secC" style="grid-column:1 / span 1;">
-        <h2 id="secC">
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16c2-6 10-6 12 0" stroke="#6ad3d1" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="8" cy="9" r="2" fill="#ffd36e"/></svg>
-          Section C — Using Homonyms
-        </h2>
-        <div class="desc">The word below is a homonym (same spelling and sound — different meanings). Write two sentences to show the two meanings.</div>
-
-        <div class="two">
-          <div style="font-weight:800">Word: <span style="color:#3b7a6b">Lie</span></div>
-
-          <div>
-            <div class="label">Meaning 1 (To rest / be in a flat position):</div>
-            <div class="linebox">Sentence: _______________________________________________________________</div>
-          </div>
-
-          <div>
-            <div class="label">Meaning 2 (To say something that is not true):</div>
-            <div class="linebox">Sentence: _______________________________________________________________</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Right column bottom -->
-      <section class="card" aria-labelledby="secD" style="grid-column:2 / span 1;">
-        <h2 id="secD">
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" stroke="#ff8a5b" stroke-width="2" fill="#fff8f0"/><path d="M20 20l-4.5-4.5" stroke="#6ad3d1" stroke-width="2" stroke-linecap="round"/></svg>
-          Section D — Find the Pair
-        </h2>
-        <div class="desc">Read the sentences and find the homophone pair (words that sound the same but are spelled differently).</div>
-
-        <div class="find-list">
-          <div class="find-item">
-            <div class="emoji" aria-hidden="true">🍞</div>
-            <div class="sentence">The baker said, "I <strong>know</strong> I have <strong>no</strong> bread left."</div>
-            <div class="answer-line">(know / no)</div>
-          </div>
-
-          <div class="find-item">
-            <div class="emoji" aria-hidden="true">🐜</div>
-            <div class="sentence">My <strong>aunt</strong> likes to watch the <strong>ant</strong> crawl across the ground.</div>
-            <div class="answer-line">(ant / aunt)</div>
-          </div>
-
-          <div class="find-item">
-            <div class="emoji" aria-hidden="true">🏠</div>
-            <div class="sentence">We went <strong>their</strong> to see <strong>their</strong> new house.</div>
-            <div class="answer-line">(there / their)</div>
-          </div>
-
-          <div class="find-item">
-            <div class="emoji" aria-hidden="true">⚾</div>
-            <div class="sentence">The children <strong>threw</strong> the ball <strong>through</strong> the hoop.</div>
-            <div class="answer-line">(threw / through)</div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="tip">Tip: Print on A4 (Portrait). Let students colour the icons and write answers in pen.</div>
-      <div class="small">Warm pictorial layout — peach • yellow • turquoise.</div>
-    </footer>
+  <div class="footer">
+    Student Name: ________________ Date: ________________
   </div>
 </body>
 </html>
