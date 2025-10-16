@@ -3,229 +3,457 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Homophones & Homonyms — A4 Landscape Poster</title>
+<title>Homophones & Homonyms — Revision Poster</title>
 <style>
-  /* Print page size and margin */
-  @page { size: A4 landscape; margin: 12mm; }
-  html,body{
-    height:100%;
-    margin:0;
-    background: #fff6ea;
-    font-family: "Trebuchet MS", Arial, sans-serif;
+  :root{
+    --bg:#fff6ea;
+    --card:#ffffff;
+    --muted:#6b6b6b;
+    --accent:#ff8a5b;
+    --accent2:#ffd36e;
+    --accent3:#6ad3d1;
+    --paper-shadow: 0 10px 25px rgba(15,20,30,0.08);
+    --radius:18px;
+    --kid-font: "Century Gothic", "Trebuchet MS", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  html,body{height:100%;margin:0;}
+  body{
+    font-family:var(--kid-font);
+    background:
+      radial-gradient(circle at 10% 10%, rgba(255,138,91,0.08), transparent 10%),
+      radial-gradient(circle at 90% 85%, rgba(106,211,209,0.06), transparent 12%),
+      var(--bg);
+    color:#222;
+    padding:32px;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
-    color:#222;
   }
 
-  /* Viewport container that centers the sheet on screen */
-  .viewport {
-    width:100vw;
-    height:100vh;
+  .poster{
+    max-width:1000px;
+    margin:0 auto;
+    background: linear-gradient(180deg,var(--card), #fff);
+    border-radius:var(--radius);
+    padding:28px;
+    box-shadow:var(--paper-shadow);
+    border: 6px double #fff3e6;
+  }
+
+  header{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    margin-bottom:12px;
+  }
+  .logo{
+    width:110px;height:110px;
+    border-radius:16px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
     display:flex;
     align-items:center;
     justify-content:center;
-    box-sizing:border-box;
-    padding:10px;
-    overflow:auto;
-  }
-
-  /* The actual printable sheet: exact A4 landscape dimensions */
-  .sheet {
-    width:297mm;      /* real A4 landscape width */
-    height:210mm;     /* real A4 landscape height */
-    box-sizing:border-box;
-    background: linear-gradient(90deg,#fff6ea,#fffdf8 60%);
-    border-radius:6px;
-    padding:14mm;     /* inner margin in mm for printing */
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap:12px;
-    align-items:start;
-    transform-origin: top left; /* used for on-screen scaling only */
-    box-shadow: 0 12px 30px rgba(15,20,30,0.06);
-  }
-
-  /* Header across the top (spans all columns) */
-  .title {
-    grid-column: 1 / -1;
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-  .logo {
-    width:76px; height:76px; border-radius:10px;
-    background: linear-gradient(135deg,#ff8a5b,#ffd36e);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow: 0 6px 18px rgba(255,138,91,0.12);
+    box-shadow:0 6px 20px rgba(255,138,91,0.18);
     flex-shrink:0;
   }
-  .logo svg{width:44px;height:44px}
+  .logo svg{width:70px;height:70px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.08));}
   h1{
-    font-size:28px;margin:0;color:#3a3a3a;
-    line-height:1;
+    font-size:28px;margin:0 0 6px 0;
+    color:#3f3f3f;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
   }
-  .subtitle{font-size:13px;color:#6b6b6b;margin-top:6px}
+  p.lead{margin:0;color:var(--muted);font-size:14px;}
 
-  /* Section boxes */
-  .panel{
-    background: #fff;
-    border-radius:10px;
-    padding:10px;
-    box-shadow: 0 6px 14px rgba(20,30,40,0.03);
-    min-height:60mm;
+  .meta{
     display:flex;
-    flex-direction:column;
-    gap:8px;
+    gap:12px;
+    margin-top:12px;
+    align-items:center;
+  }
+  .meta .field{
+    background: #fff3e6;
+    padding:8px 12px;border-radius:12px;font-weight:600;color:#6b3a2b;
+    box-shadow:0 3px 10px rgba(250,200,170,0.12);
+    font-size:13px;
   }
 
-  .panel h2{
-    margin:0;padding:6px;border-radius:8px;background:#ffefd5;color:#3b3b3b;font-size:15px;
-    text-align:center;
-  }
-  .panel .desc{font-size:12px;color:#5f5f5f}
-
-  /* Specific small styles */
-  .pair { display:flex; align-items:center; gap:8px; background:#fffaf6; border-radius:8px; padding:8px; font-weight:700 }
-  .pair .icon { width:46px; height:46px; display:grid;place-items:center; background:#fff;border-radius:6px }
-  .pair .choose { margin-left:auto; color:#6b6b6b; font-size:13px }
-
-  .choices { display:flex; flex-direction:column; gap:8px }
-  .choice { display:flex; gap:10px; align-items:center; padding:8px; background:#eafff7; border-radius:8px; font-weight:700 }
-  .choice .emoji { width:44px;height:44px; display:grid;place-items:center; background:#fff; border-radius:6px }
-  .fill { margin-left:auto; width:110px; border-bottom:2px solid rgba(0,0,0,0.12); height:18px }
-
-  .two-lines { display:flex; flex-direction:column; gap:8px }
-  .line { border-bottom:2px solid rgba(0,0,0,0.12); height:18px; padding-top:4px; }
-
-  .find-list { display:flex; flex-direction:column; gap:8px }
-  .find { display:flex; gap:8px; align-items:center; background:#fffaf6; padding:8px; border-radius:8px }
-  .find .ans { margin-left:auto; font-weight:800; color:#2f2f2f }
-
-  footer { grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#666 }
-
-  /* Make sure shadows & background don't print heavy */
-  @media print {
-    body{background:#fff}
-    .viewport { padding:0 }
-    .sheet { box-shadow:none; border-radius:0; padding:12mm }
+  main{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:18px;
   }
 
-  /* For smaller screens, reduce visual scale via CSS fallback (JS will override to best fit) */
-  @media (max-width:1200px){
-    .sheet { transform: scale(0.9); }
+  .section{
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), #fff);
+    border-radius:12px;
+    padding:14px;
+    box-shadow:0 6px 18px rgba(20,30,40,0.04);
+    display:grid;
+    gap:10px;
   }
+
+  .section h2{
+    margin:0;font-size:18px;color:#2d2d2d;display:flex;align-items:center;gap:10px;
+  }
+  .section .desc{color:var(--muted);font-size:13px;margin-top:4px;}
+
+  /* Section A layout */
+  .match-grid{
+    display:flex;gap:12px;align-items:flex-start;
+    flex-wrap:wrap;
+  }
+  .cards{
+    display:flex;gap:12px;flex:1;
+    min-width:220px;
+  }
+  .word-card{
+    background:linear-gradient(180deg,#fff,#fffaf0);
+    border-radius:10px;padding:10px;flex:1;
+    border:2px dashed rgba(0,0,0,0.03);
+    display:flex;gap:10px;align-items:center;
+  }
+  .word-card svg{width:48px;height:48px;flex-shrink:0}
+  .word-card .word{font-weight:700}
+
+  .radio-row{display:flex;gap:10px;align-items:center;font-size:14px;}
+  .radio-row input{transform:scale(1.1);margin-right:6px;}
+
+  /* Section B */
+  .choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .choice{
+    background:#f6fff9;border-radius:10px;padding:10px;display:flex;gap:10px;align-items:center;
+    border:1px solid rgba(110,200,170,0.12);
+  }
+  .choice .q{font-weight:600}
+  .choice .fill{margin-left:auto;color:var(--muted);font-style:italic;}
+
+  /* Section C */
+  .two-lines{display:grid;gap:8px;}
+  .line{background:#fff;border-radius:8px;padding:10px;border:1px solid rgba(0,0,0,0.04)}
+
+  /* Section D */
+  .example{display:flex;gap:12px;align-items:center;padding:10px;border-radius:10px;background:#fffaf6;border:1px solid rgba(0,0,0,0.03)}
+  .example .sentence{flex:1}
+  .example .pair{min-width:180px;background:#fff;border-radius:8px;padding:8px;text-align:center;font-weight:700}
+
+  footer{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:12px}
+  .small{font-size:13px;color:var(--muted)}
+
+  /* show answers */
+  .answers{color:transparent;background-clip:text;-webkit-background-clip:text}
+  .answers.visible{color: #2b7a2b;background:none}
+
+  /* button */
+  .btn{
+    background:linear-gradient(180deg,#6ad3d1,#3dbdb8);
+    border:none;color:#0b3a39;padding:10px 14px;border-radius:12px;font-weight:800;
+    cursor:pointer;box-shadow:0 8px 18px rgba(107,211,209,0.18);
+  }
+  .btn.secondary{
+    background:linear-gradient(180deg,#ffd36e,#ffb86b);color:#622a06;
+  }
+
+  /* responsive */
+  @media (max-width:800px){
+    .choices{grid-template-columns:1fr;}
+    header{flex-direction:row}
+  }
+
+  /* printable tweaks */
+  @media print{
+    body{padding:0}
+    .btn, .meta{display:none}
+    .poster{box-shadow:none;border:none;margin:0;border-radius:0}
+  }
+
+  /* fun tiny shapes */
+  .sparkle{width:12px;height:12px;display:inline-block;vertical-align:middle}
 </style>
 </head>
 <body>
-  <div class="viewport">
-    <div class="sheet" id="sheet" role="document" aria-label="Homophones and Homonyms poster">
-
-      <div class="title">
-        <div class="logo" aria-hidden="true">
-          <!-- simple inline svg -->
-          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="6" y="12" width="36" height="36" rx="6" fill="#fff" opacity="0.95"/>
-            <path d="M10 14h36v8H10z" fill="#ff8a5b"/>
-            <circle cx="52" cy="18" r="8" fill="#6ad3d1"/>
-            <path d="M52 13v6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <h1>Homophones & Homonyms — Revision Poster</h1>
-          <div class="subtitle">Pictorial • Kid-friendly • Printable on A4 (Landscape)</div>
-        </div>
+  <div class="poster" role="article" aria-labelledby="title">
+    <header>
+      <div class="logo" aria-hidden="true">
+        <!-- cute book + lightbulb SVG -->
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="6" y="12" width="40" height="32" rx="4" fill="#fff" opacity="0.9"/>
+          <path d="M10 14h36v8H10z" fill="#ff8a5b"/>
+          <path d="M46 14v30" stroke="#ffd36e" stroke-width="2" opacity="0.7"/>
+          <circle cx="52" cy="18" r="8" fill="#6ad3d1"/>
+          <path d="M52 13v6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
       </div>
 
+      <div>
+        <h1 id="title">Homophones & Homonyms — Revision Worksheet</h1>
+        <p class="lead">Pictorial & kid-friendly practice — match, choose, write, and find pairs!</p>
+        <div class="meta" aria-hidden="true">
+          <div class="field">Student Name: _________________________</div>
+          <div class="field">Date: _________________________</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
       <!-- Section A -->
-      <div class="panel" style="grid-column:1">
-        <h2>Section A — Understanding the Words</h2>
-        <div class="desc">Homonyms: same sound (or spelling) but different meanings. <br>
-        Homophones: same sound, different spelling & meaning (e.g., <strong>meat / meet</strong>).</div>
+      <section class="section" aria-labelledby="secA">
+        <h2 id="secA">
+          <!-- book icon -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 6v13a1 1 0 0 0 1 1h14V6H3z" fill="#ffd36e"/>
+            <path d="M21 6h-7v14h7V6z" fill="#ff8a5b"/>
+          </svg>
+          Section A — Understanding the Words
+        </h2>
+        <p class="desc">
+          Homonyms: same sound (and sometimes same spelling) but different meanings.<br>
+          Homophones: same sound, different spellings and meanings (e.g., <strong>meat</strong> / <strong>meet</strong>).
+        </p>
 
-        <div class="pair" aria-hidden="true">
-          <div class="icon">🐻</div>
-          <div>A. Bear — (animal) & Bear — (to deal with something)</div>
-          <div class="choose">Choose: ☐ Homophones ☐ Homonyms</div>
+        <div class="match-grid" role="group" aria-label="Match the word pair to the correct description">
+          <div style="flex:1;min-width:260px">
+            <div class="word-card" title="Bear (animal)">
+              <!-- bear icon -->
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <circle cx="32" cy="32" r="28" fill="#ffefd5"/>
+                <circle cx="22" cy="24" r="6" fill="#fff"/>
+                <circle cx="42" cy="24" r="6" fill="#fff"/>
+                <circle cx="22" cy="24" r="3" fill="#4b2e2e"/>
+                <circle cx="42" cy="24" r="3" fill="#4b2e2e"/>
+                <ellipse cx="32" cy="40" rx="10" ry="6" fill="#4b2e2e"/>
+              </svg>
+              <div>
+                <div class="word">A. Bear — (animal) & Bear — (to deal with something)</div>
+                <div class="desc" style="font-size:13px;color:var(--muted)">Pick 1 or 2</div>
+                <div class="radio-row" style="margin-top:6px">
+                  <label><input type="radio" name="qA" value="1"> 1</label>
+                  <label><input type="radio" name="qA" value="2"> 2</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="flex:1;min-width:260px">
+            <div class="word-card">
+              <!-- buy & by icon -->
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect x="6" y="12" width="28" height="36" rx="6" fill="#e6fff9"/>
+                <path d="M38 20h16v24H38z" fill="#fff3e6"/>
+                <circle cx="22" cy="34" r="4" fill="#ff8a5b"/>
+                <path d="M36 28h10" stroke="#6ad3d1" stroke-width="2" stroke-linecap="round"/>
+                <path d="M36 36h10" stroke="#ffd36e" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <div>
+                <div class="word">B. Buy & By</div>
+                <div class="desc" style="font-size:13px;color:var(--muted)">Pick 1 or 2</div>
+                <div class="radio-row" style="margin-top:6px">
+                  <label><input type="radio" name="qB" value="1"> 1</label>
+                  <label><input type="radio" name="qB" value="2"> 2</label>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="pair" aria-hidden="true">
-          <div class="icon">🛍️</div>
-          <div>B. Buy & By</div>
-          <div class="choose">Choose: ☐ Homophones ☐ Homonyms</div>
+        <div style="display:flex;gap:12px;margin-top:8px">
+          <div style="flex:1;font-weight:700">A. _____  B. _____</div>
+          <button class="btn secondary" id="checkAB" type="button" aria-pressed="false">Check Answer</button>
         </div>
-
-        <div style="margin-top:auto;font-weight:800">Write: A. _____ &nbsp;&nbsp;&nbsp; B. _____</div>
-      </div>
+      </section>
 
       <!-- Section B -->
-      <div class="panel" style="grid-column:2">
-        <h2>Section B — Choose the Correct Word</h2>
-        <div class="desc">Pick the correct homophone to complete each sentence.</div>
+      <section class="section" aria-labelledby="secB">
+        <h2 id="secB">
+          <!-- fork + cookie icon -->
+          <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 3v7" stroke="#ff8a5b" stroke-width="2" stroke-linecap="round"/>
+            <path d="M10 3v7" stroke="#ff8a5b" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="18" cy="16" r="5" fill="#ffd36e"/>
+            <circle cx="17" cy="15" r="1.2" fill="#6b3a2b"/>
+            <circle cx="19.5" cy="17" r="1.1" fill="#6b3a2b"/>
+          </svg>
+          Section B — Choose the Correct Word (Homophones)
+        </h2>
+        <p class="desc">Pick the correct word in brackets. These sound the same but have different spellings.</p>
 
         <div class="choices" role="list">
-          <div class="choice"> <div class="emoji">🥩</div> He doesn't eat much (meat / meet). <div class="fill" aria-hidden="true"></div></div>
-          <div class="choice"> <div class="emoji">🍪</div> Who (eight / ate) the last cookie? <div class="fill" aria-hidden="true"></div></div>
-          <div class="choice"> <div class="emoji">🏪</div> I need to stop (buy / by) the shop. <div class="fill" aria-hidden="true"></div></div>
-          <div class="choice"> <div class="emoji">🦁</div> The lion has a thick (mane / main). <div class="fill" aria-hidden="true"></div></div>
-          <div class="choice"> <div class="emoji">🐦</div> The little bird fears the (pray / prey) bird. <div class="fill" aria-hidden="true"></div></div>
-          <div class="choice"> <div class="emoji">🧺</div> Will you (dew / do) the laundry today? <div class="fill" aria-hidden="true"></div></div>
+          <div class="choice" role="listitem">
+            <div style="width:44px;height:44px;display:grid;place-items:center;border-radius:10px;background:#fff">🥩</div>
+            <div>
+              <div class="q">He doesn't eat much <strong>(meat / meet)</strong>.</div>
+              <div class="fill">Answer: <span class="answers" id="b1">meat</span></div>
+            </div>
+          </div>
+
+          <div class="choice" role="listitem">
+            <div style="width:44px;height:44px;display:grid;place-items:center;border-radius:10px;background:#fff">🍪</div>
+            <div>
+              <div class="q">Who <strong>(eight / ate)</strong> the last cookie?</div>
+              <div class="fill">Answer: <span class="answers" id="b2">ate</span></div>
+            </div>
+          </div>
+
+          <div class="choice" role="listitem">
+            <div style="width:44px;height:44px;display:grid;place-items:center;border-radius:10px;background:#fff">🏪</div>
+            <div>
+              <div class="q">I need to stop <strong>(buy / by)</strong> the shop on my way home.</div>
+              <div class="fill">Answer: <span class="answers" id="b3">by</span></div>
+            </div>
+          </div>
+
+          <div class="choice" role="listitem">
+            <div style="width:44px;height:44px;display:grid;place-items:center;border-radius:10px;background:#fff">🦁</div>
+            <div>
+              <div class="q">The lion has a beautiful, thick <strong>(mane / main)</strong>.</div>
+              <div class="fill">Answer: <span class="answers" id="b4">mane</span></div>
+            </div>
+          </div>
+
+          <div class="choice" role="listitem">
+            <div style="width:44px;height:44px;display:grid;place-items:center;border-radius:10px;background:#fff">🐦</div>
+            <div>
+              <div class="q">The little bird is afraid of the <strong>(pray / prey)</strong> bird that hunts it.</div>
+              <div class="fill">Answer: <span class="answers" id="b5">prey</span></div>
+            </div>
+          </div>
+
+          <div class="choice" role="listitem">
+            <div style="width:44px;height:44px;display:grid;place-items:center;border-radius:10px;background:#fff">🧺</div>
+            <div>
+              <div class="q">Will you <strong>(dew / do)</strong> the laundry today?</div>
+              <div class="fill">Answer: <span class="answers" id="b6">do</span></div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       <!-- Section C -->
-      <div class="panel" style="grid-column:3">
-        <h2>Section C — Using Homonyms</h2>
-        <div class="desc">The word below is a homonym. Write two sentences showing two meanings.</div>
-
-        <div style="font-weight:800;font-size:18px">Word: <span style="color:#3b7a6b">Lie</span></div>
+      <section class="section" aria-labelledby="secC">
+        <h2 id="secC">
+          <!-- lying person icon -->
+          <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 16c2-6 10-6 12 0" stroke="#6ad3d1" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <circle cx="8" cy="9" r="2" fill="#ffd36e"/>
+          </svg>
+          Section C — Using Homonyms
+        </h2>
+        <p class="desc">The word below is a homonym: same spelling & sound — different meanings. Write two sentences.</p>
 
         <div class="two-lines">
-          <div><div class="desc">Meaning 1 — To rest / be in a flat position:</div><div class="line"></div></div>
-          <div><div class="desc">Meaning 2 — To say something untrue:</div><div class="line"></div></div>
+          <div style="font-weight:700">Word: <span style="color:#3b7a6b">Lie</span></div>
+          <div class="line">
+            <div style="font-size:13px;color:var(--muted)">Meaning 1 (To rest / be in a flat position):</div>
+            <div style="height:42px;margin-top:6px;border-radius:6px;background:#fff;padding:8px;border:1px dashed rgba(0,0,0,0.05)">
+              Sentence: _______________________________________________________________
+            </div>
+          </div>
+          <div class="line">
+            <div style="font-size:13px;color:var(--muted)">Meaning 2 (To say something not true):</div>
+            <div style="height:42px;margin-top:6px;border-radius:6px;background:#fff;padding:8px;border:1px dashed rgba(0,0,0,0.05)">
+              Sentence: _______________________________________________________________
+            </div>
+          </div>
         </div>
-
-        <div style="margin-top:auto;font-size:12px;color:#666">Tip: Ask students to write one sentence for each meaning.</div>
-      </div>
+      </section>
 
       <!-- Section D -->
-      <div class="panel" style="grid-column:4">
-        <h2>Section D — Find the Pair</h2>
-        <div class="desc">Find the homophone pair in each sentence.</div>
+      <section class="section" aria-labelledby="secD">
+        <h2 id="secD">
+          <!-- magnifier icon -->
+          <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6" stroke="#ff8a5b" stroke-width="2" fill="#fff8f0"/>
+            <path d="M20 20l-4.5-4.5" stroke="#6ad3d1" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Section D — Find the Pair
+        </h2>
+        <p class="desc">Read the sentences and find the homophone pair.</p>
 
-        <div class="find-list">
-          <div class="find"><div>🍞 The baker said, "I <strong>know</strong> I have <strong>no</strong> bread left."</div><div class="ans">(know / no)</div></div>
-          <div class="find"><div>🐜 My <strong>aunt</strong> likes to watch the <strong>ant</strong> crawl across the ground.</div><div class="ans">(ant / aunt)</div></div>
-          <div class="find"><div>🏠 We went <strong>their</strong> to see <strong>their</strong> new house.</div><div class="ans">(there / their)</div></div>
-          <div class="find"><div>⚾ The children <strong>threw</strong> the ball <strong>through</strong> the hoop.</div><div class="ans">(threw / through)</div></div>
+        <div class="example">
+          <div style="width:44px;height:44px;display:grid;place-items:center;background:#fff;border-radius:8px">🍞</div>
+          <div class="sentence">The baker said, "I <strong>know</strong> I have <strong>no</strong> bread left."</div>
+          <div class="pair">Homophone Pair: <div style="font-weight:800;margin-top:6px;">(know / no)</div></div>
         </div>
 
-        <div style="margin-top:auto;font-size:12px;color:#666">Tip: Read the sentence out loud — that helps hear the pair.</div>
-      </div>
+        <div class="example">
+          <div style="width:44px;height:44px;display:grid;place-items:center;background:#fff;border-radius:8px">🐜</div>
+          <div class="sentence">My aunt likes to watch the <strong>ant</strong> crawl across the ground.</div>
+          <div class="pair">Homophone Pair: <div style="font-weight:800;margin-top:6px">ant / aunt</div></div>
+        </div>
 
-      <footer>
-        <div>Student Name: ____________________</div>
-        <div>Date: ____________________</div>
-      </footer>
-    </div>
+        <div class="example">
+          <div style="width:44px;height:44px;display:grid;place-items:center;background:#fff;border-radius:8px">🏠</div>
+          <div class="sentence">We went <strong>their</strong> to see <strong>their</strong> new house.</div>
+          <div class="pair">Homophone Pair: <div style="font-weight:800;margin-top:6px">there / their</div></div>
+        </div>
+
+        <div class="example">
+          <div style="width:44px;height:44px;display:grid;place-items:center;background:#fff;border-radius:8px">⚾</div>
+          <div class="sentence">The children <strong>threw</strong> the ball <strong>through</strong> the hoop.</div>
+          <div class="pair">Homophone Pair: <div style="font-weight:800;margin-top:6px">threw / through</div></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="small">Tip: Print this on A4. Let students colour the icons and write answers in pen.</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn" id="toggleAnswers">Show Answers</button>
+        <button class="btn secondary" id="printBtn">Print / Save PDF</button>
+      </div>
+    </footer>
   </div>
 
 <script>
-  /* Auto-scale the sheet ON-SCREEN so the entire poster is visible without scrolling.
-     This scaling does NOT affect printing: the printed sheet uses real A4 sizes.
-     If you prefer no scaling, remove this script. */
-  (function fitToView(){
-    function scaleSheet(){
-      var sheet = document.getElementById('sheet');
-      var vw = window.innerWidth - 40; // take padding into account
-      var vh = window.innerHeight - 40;
-      // sheet width/height in CSS mm -> compute pixels by reading bounding box
-      var rect = sheet.getBoundingClientRect();
-      var scale = Math.min(vw / rect.width, vh / rect.height, 1);
-      sheet.style.transform = 'scale(' + scale + ')';
+  // Toggle answers (teacher button)
+  const toggle = document.getElementById('toggleAnswers');
+  const answers = document.querySelectorAll('.answers');
+  let visible = false;
+  toggle.addEventListener('click', () => {
+    visible = !visible;
+    answers.forEach(el => {
+      if(visible) el.classList.add('visible'); else el.classList.remove('visible');
+    });
+    toggle.textContent = visible ? 'Hide Answers' : 'Show Answers';
+  });
+
+  // quick check for Section A (simple)
+  document.getElementById('checkAB').addEventListener('click', () => {
+    // Correct mapping: A is 2 (homonyms), B is 1 (homophones)
+    const a = document.querySelector('input[name="qA"]:checked');
+    const b = document.querySelector('input[name="qB"]:checked';
+    // handle gracefully
+    let aVal = a ? a.value : 'none';
+    let bVal = b ? b.value : 'none';
+    const correctA = '2', correctB = '1';
+    let msg = '';
+    if(aVal === correctA && bVal === correctB){
+      msg = 'Great! Both answers are correct ✔️';
+    } else if((aVal === correctA && bVal !== correctB) || (aVal !== correctA && bVal === correctB)){
+      msg = 'One of them is correct. Check the other one.';
+    } else {
+      msg = 'Looks like both need another try — A = 2, B = 1 (hint)';
     }
-    // run now and on resize
-    scaleSheet();
-    window.addEventListener('resize', scaleSheet);
+    alert(msg);
+  });
+
+  // Print button
+  document.getElementById('printBtn').addEventListener('click', () => {
+    window.print();
+  });
+
+  // small JS fix if missing selection in Section A
+  // (The code above uses querySelector for qB; ensure it doesn't break)
+  (function safeFix(){
+    const checkButton = document.getElementById('checkAB');
+    checkButton.addEventListener('click', () => {
+      const a = document.querySelector('input[name="qA"]:checked');
+      const b = document.querySelector('input[name="qB"]:checked');
+      // if none selected, prompt teacher
+      if(!a || !b){
+        alert('Please select A and B choices before checking (teachers: children can try first).');
+      }
+    }, {once:false});
   })();
 </script>
 </body>
