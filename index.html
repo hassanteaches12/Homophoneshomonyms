@@ -1,128 +1,232 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homophones and Homonyms Poster</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Homophones & Homonyms — A4 Landscape Poster</title>
 <style>
-  @page { size: A4 landscape; margin: 1cm; }
-  body {
-    font-family: "Comic Sans MS", sans-serif;
-    background: linear-gradient(90deg, #ffe8c7, #fff6e6, #e2fff9);
-    margin: 0;
-    padding: 0;
-    color: #333;
-    overflow: hidden;
+  /* Print page size and margin */
+  @page { size: A4 landscape; margin: 12mm; }
+  html,body{
+    height:100%;
+    margin:0;
+    background: #fff6ea;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    color:#222;
   }
-  .poster {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    height: 100vh;
-    box-sizing: border-box;
-    padding: 20px 40px;
+
+  /* Viewport container that centers the sheet on screen */
+  .viewport {
+    width:100vw;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-sizing:border-box;
+    padding:10px;
+    overflow:auto;
   }
-  .section {
-    width: 23%;
+
+  /* The actual printable sheet: exact A4 landscape dimensions */
+  .sheet {
+    width:297mm;      /* real A4 landscape width */
+    height:210mm;     /* real A4 landscape height */
+    box-sizing:border-box;
+    background: linear-gradient(90deg,#fff6ea,#fffdf8 60%);
+    border-radius:6px;
+    padding:14mm;     /* inner margin in mm for printing */
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap:12px;
+    align-items:start;
+    transform-origin: top left; /* used for on-screen scaling only */
+    box-shadow: 0 12px 30px rgba(15,20,30,0.06);
+  }
+
+  /* Header across the top (spans all columns) */
+  .title {
+    grid-column: 1 / -1;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .logo {
+    width:76px; height:76px; border-radius:10px;
+    background: linear-gradient(135deg,#ff8a5b,#ffd36e);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow: 0 6px 18px rgba(255,138,91,0.12);
+    flex-shrink:0;
+  }
+  .logo svg{width:44px;height:44px}
+  h1{
+    font-size:28px;margin:0;color:#3a3a3a;
+    line-height:1;
+  }
+  .subtitle{font-size:13px;color:#6b6b6b;margin-top:6px}
+
+  /* Section boxes */
+  .panel{
     background: #fff;
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-    box-sizing: border-box;
+    border-radius:10px;
+    padding:10px;
+    box-shadow: 0 6px 14px rgba(20,30,40,0.03);
+    min-height:60mm;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
   }
-  h1 {
-    text-align: center;
-    color: #ff7b54;
-    font-size: 26px;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 2px #fff;
+
+  .panel h2{
+    margin:0;padding:6px;border-radius:8px;background:#ffefd5;color:#3b3b3b;font-size:15px;
+    text-align:center;
   }
-  h2 {
-    background-color: #ffcc6f;
-    padding: 8px;
-    border-radius: 10px;
-    text-align: center;
-    color: #333;
-    font-size: 16px;
-    margin: 10px 0;
+  .panel .desc{font-size:12px;color:#5f5f5f}
+
+  /* Specific small styles */
+  .pair { display:flex; align-items:center; gap:8px; background:#fffaf6; border-radius:8px; padding:8px; font-weight:700 }
+  .pair .icon { width:46px; height:46px; display:grid;place-items:center; background:#fff;border-radius:6px }
+  .pair .choose { margin-left:auto; color:#6b6b6b; font-size:13px }
+
+  .choices { display:flex; flex-direction:column; gap:8px }
+  .choice { display:flex; gap:10px; align-items:center; padding:8px; background:#eafff7; border-radius:8px; font-weight:700 }
+  .choice .emoji { width:44px;height:44px; display:grid;place-items:center; background:#fff; border-radius:6px }
+  .fill { margin-left:auto; width:110px; border-bottom:2px solid rgba(0,0,0,0.12); height:18px }
+
+  .two-lines { display:flex; flex-direction:column; gap:8px }
+  .line { border-bottom:2px solid rgba(0,0,0,0.12); height:18px; padding-top:4px; }
+
+  .find-list { display:flex; flex-direction:column; gap:8px }
+  .find { display:flex; gap:8px; align-items:center; background:#fffaf6; padding:8px; border-radius:8px }
+  .find .ans { margin-left:auto; font-weight:800; color:#2f2f2f }
+
+  footer { grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#666 }
+
+  /* Make sure shadows & background don't print heavy */
+  @media print {
+    body{background:#fff}
+    .viewport { padding:0 }
+    .sheet { box-shadow:none; border-radius:0; padding:12mm }
   }
-  p, li {
-    font-size: 14px;
-    line-height: 1.4em;
-  }
-  .line {
-    border-bottom: 1px dotted #999;
-    display: inline-block;
-    width: 100%;
-    height: 16px;
-  }
-  .wordpair, .sentence {
-    background-color: #e7fff8;
-    border-radius: 10px;
-    padding: 5px 8px;
-    margin: 4px 0;
-  }
-  .footer {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    color: #777;
+
+  /* For smaller screens, reduce visual scale via CSS fallback (JS will override to best fit) */
+  @media (max-width:1200px){
+    .sheet { transform: scale(0.9); }
   }
 </style>
 </head>
 <body>
-  <h1>🦋 Homophones & Homonyms Revision Poster 🦋</h1>
+  <div class="viewport">
+    <div class="sheet" id="sheet" role="document" aria-label="Homophones and Homonyms poster">
 
-  <div class="poster">
+      <div class="title">
+        <div class="logo" aria-hidden="true">
+          <!-- simple inline svg -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="6" y="12" width="36" height="36" rx="6" fill="#fff" opacity="0.95"/>
+            <path d="M10 14h36v8H10z" fill="#ff8a5b"/>
+            <circle cx="52" cy="18" r="8" fill="#6ad3d1"/>
+            <path d="M52 13v6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Homophones & Homonyms — Revision Poster</h1>
+          <div class="subtitle">Pictorial • Kid-friendly • Printable on A4 (Landscape)</div>
+        </div>
+      </div>
 
-    <div class="section">
-      <h2>Section A: Understanding the Words</h2>
-      <p><strong>Homonyms</strong> → same spelling or pronunciation but <em>different meanings</em>.</p>
-      <p><strong>Homophones</strong> → same sound but <em>different spelling & meaning</em>.</p>
-      <p>Match the word pair:</p>
-      <div class="wordpair">A. Bear (animal) & Bear (to deal with something) → <span class="line"></span></div>
-      <div class="wordpair">B. Buy & By → <span class="line"></span></div>
-      <p style="text-align:center;">A ____ B ____</p>
+      <!-- Section A -->
+      <div class="panel" style="grid-column:1">
+        <h2>Section A — Understanding the Words</h2>
+        <div class="desc">Homonyms: same sound (or spelling) but different meanings. <br>
+        Homophones: same sound, different spelling & meaning (e.g., <strong>meat / meet</strong>).</div>
+
+        <div class="pair" aria-hidden="true">
+          <div class="icon">🐻</div>
+          <div>A. Bear — (animal) & Bear — (to deal with something)</div>
+          <div class="choose">Choose: ☐ Homophones ☐ Homonyms</div>
+        </div>
+
+        <div class="pair" aria-hidden="true">
+          <div class="icon">🛍️</div>
+          <div>B. Buy & By</div>
+          <div class="choose">Choose: ☐ Homophones ☐ Homonyms</div>
+        </div>
+
+        <div style="margin-top:auto;font-weight:800">Write: A. _____ &nbsp;&nbsp;&nbsp; B. _____</div>
+      </div>
+
+      <!-- Section B -->
+      <div class="panel" style="grid-column:2">
+        <h2>Section B — Choose the Correct Word</h2>
+        <div class="desc">Pick the correct homophone to complete each sentence.</div>
+
+        <div class="choices" role="list">
+          <div class="choice"> <div class="emoji">🥩</div> He doesn't eat much (meat / meet). <div class="fill" aria-hidden="true"></div></div>
+          <div class="choice"> <div class="emoji">🍪</div> Who (eight / ate) the last cookie? <div class="fill" aria-hidden="true"></div></div>
+          <div class="choice"> <div class="emoji">🏪</div> I need to stop (buy / by) the shop. <div class="fill" aria-hidden="true"></div></div>
+          <div class="choice"> <div class="emoji">🦁</div> The lion has a thick (mane / main). <div class="fill" aria-hidden="true"></div></div>
+          <div class="choice"> <div class="emoji">🐦</div> The little bird fears the (pray / prey) bird. <div class="fill" aria-hidden="true"></div></div>
+          <div class="choice"> <div class="emoji">🧺</div> Will you (dew / do) the laundry today? <div class="fill" aria-hidden="true"></div></div>
+        </div>
+      </div>
+
+      <!-- Section C -->
+      <div class="panel" style="grid-column:3">
+        <h2>Section C — Using Homonyms</h2>
+        <div class="desc">The word below is a homonym. Write two sentences showing two meanings.</div>
+
+        <div style="font-weight:800;font-size:18px">Word: <span style="color:#3b7a6b">Lie</span></div>
+
+        <div class="two-lines">
+          <div><div class="desc">Meaning 1 — To rest / be in a flat position:</div><div class="line"></div></div>
+          <div><div class="desc">Meaning 2 — To say something untrue:</div><div class="line"></div></div>
+        </div>
+
+        <div style="margin-top:auto;font-size:12px;color:#666">Tip: Ask students to write one sentence for each meaning.</div>
+      </div>
+
+      <!-- Section D -->
+      <div class="panel" style="grid-column:4">
+        <h2>Section D — Find the Pair</h2>
+        <div class="desc">Find the homophone pair in each sentence.</div>
+
+        <div class="find-list">
+          <div class="find"><div>🍞 The baker said, "I <strong>know</strong> I have <strong>no</strong> bread left."</div><div class="ans">(know / no)</div></div>
+          <div class="find"><div>🐜 My <strong>aunt</strong> likes to watch the <strong>ant</strong> crawl across the ground.</div><div class="ans">(ant / aunt)</div></div>
+          <div class="find"><div>🏠 We went <strong>their</strong> to see <strong>their</strong> new house.</div><div class="ans">(there / their)</div></div>
+          <div class="find"><div>⚾ The children <strong>threw</strong> the ball <strong>through</strong> the hoop.</div><div class="ans">(threw / through)</div></div>
+        </div>
+
+        <div style="margin-top:auto;font-size:12px;color:#666">Tip: Read the sentence out loud — that helps hear the pair.</div>
+      </div>
+
+      <footer>
+        <div>Student Name: ____________________</div>
+        <div>Date: ____________________</div>
+      </footer>
     </div>
-
-    <div class="section">
-      <h2>Section B: Choose the Correct Word</h2>
-      <p><em>Pick the correct homophone:</em></p>
-      <ul>
-        <li>He doesn’t eat much (meat / meet). → <span class="line"></span></li>
-        <li>Who (eight / ate) the last cookie? → <span class="line"></span></li>
-        <li>I need to stop (buy / by) the shop. → <span class="line"></span></li>
-        <li>The lion has a thick (mane / main). → <span class="line"></span></li>
-        <li>The bird fears the (pray / prey) bird. → <span class="line"></span></li>
-        <li>Will you (dew / do) the laundry? → <span class="line"></span></li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>Section C: Using Homonyms</h2>
-      <p><strong>Word:</strong> Lie</p>
-      <p><em>Meaning 1 – To rest or be flat:</em></p>
-      <div class="line"></div>
-      <p><em>Meaning 2 – To say something untrue:</em></p>
-      <div class="line"></div>
-    </div>
-
-    <div class="section">
-      <h2>Section D: Find the Pair</h2>
-      <p>Find the <strong>homophone pairs</strong> in each sentence:</p>
-      <div class="sentence">The baker said, “I know I have no bread left.” → (know / no)</div>
-      <div class="sentence">My aunt likes to watch the ant crawl. → <span class="line"></span></div>
-      <div class="sentence">We went their to see their new house. → <span class="line"></span></div>
-      <div class="sentence">The children threw the ball through the hoop. → <span class="line"></span></div>
-    </div>
-
   </div>
 
-  <div class="footer">
-    Student Name: ________________ Date: ________________
-  </div>
+<script>
+  /* Auto-scale the sheet ON-SCREEN so the entire poster is visible without scrolling.
+     This scaling does NOT affect printing: the printed sheet uses real A4 sizes.
+     If you prefer no scaling, remove this script. */
+  (function fitToView(){
+    function scaleSheet(){
+      var sheet = document.getElementById('sheet');
+      var vw = window.innerWidth - 40; // take padding into account
+      var vh = window.innerHeight - 40;
+      // sheet width/height in CSS mm -> compute pixels by reading bounding box
+      var rect = sheet.getBoundingClientRect();
+      var scale = Math.min(vw / rect.width, vh / rect.height, 1);
+      sheet.style.transform = 'scale(' + scale + ')';
+    }
+    // run now and on resize
+    scaleSheet();
+    window.addEventListener('resize', scaleSheet);
+  })();
+</script>
 </body>
 </html>
